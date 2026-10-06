@@ -47,6 +47,12 @@ $('templateList').addEventListener('click',e=>{
   const t=window.KSS_TEMPLATES.find(x=>x.id===card.dataset.id);
   setTimeout(()=>refreshViewMeta(t),0);
 });
+$('recommendation').addEventListener('click',e=>{
+  const btn=e.target.closest('[data-template]');
+  if(!btn)return;
+  const t=window.KSS_TEMPLATES.find(x=>x.id===btn.dataset.template);
+  setTimeout(()=>refreshViewMeta(t),0);
+});
 
 $('templateSearch').addEventListener('input',e=>{
   const q=e.target.value.trim().toLowerCase();
