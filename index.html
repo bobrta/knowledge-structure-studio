@@ -3,74 +3,174 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Knowledge Structure Studio｜把課程內容轉成概念圖、決策樹、比較矩陣、流程與考前總覽。" />
+  <meta name="description" content="Knowledge Structure Studio｜把課程內容轉成能理解、能回想、能複習的知識圖。" />
   <title>Knowledge Structure Studio｜知識結構工作室</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div>
-      <strong>🧠 Knowledge Structure Studio</strong>
-      <span>知識結構工作室 v1.1</span>
-    </div>
-    <div class="top-actions">
-      <button id="fitBtn">適合畫面</button>
-      <button id="exportSvgBtn">匯出 SVG</button>
-      <button id="exportPngBtn">匯出 PNG</button>
-      <button id="saveJsonBtn">儲存 JSON</button>
-    </div>
-  </header>
+  <aside class="app-sidebar">
+    <a class="brand" href="#startSection" aria-label="Knowledge Structure Studio 首頁">
+      <span class="brand-mark">◇</span>
+      <span class="brand-copy">知識結構<small>Knowledge Structure Studio</small></span>
+    </a>
 
-  <main>
-    <aside class="sidebar">
-      <section class="course-section">
-        <h2>快速選圖</h2>
-        <p class="muted">貼入課程重點，系統會依關鍵詞推薦最適合的知識圖形；不會把文字送到伺服器。</p>
-        <textarea id="courseInput" class="course-input" placeholder="例如：比較零工式、批量式、組裝線與連續式的產量、彈性與成本差異…"></textarea>
-        <div class="row">
-          <button id="recommendBtn" class="primary">分析並推薦</button>
-          <button id="clearCourseBtn">清除</button>
+    <nav aria-label="工作室導覽">
+      <button class="nav-item active" data-target="startSection"><span>01</span>開始整理</button>
+      <button class="nav-item" data-target="librarySection"><span>02</span>選擇視圖</button>
+      <button class="nav-item" data-target="studySection"><span>03</span>視覺學習</button>
+      <button class="nav-item" data-target="advancedSection"><span>04</span>進階編輯</button>
+    </nav>
+
+    <div class="sidebar-note">
+      <strong>學習不是把內容塞進圖裡。</strong>
+      <p>先找關係，再用自己的話解釋。每張圖只處理一個主要問題。</p>
+    </div>
+  </aside>
+
+  <main class="app-main">
+    <header class="page-heading">
+      <div>
+        <p class="eyebrow">KNOWLEDGE STRUCTURE STUDIO</p>
+        <h1>把內容變成能看懂、能回想的圖。</h1>
+        <p class="heading-copy">不是單純畫漂亮圖，而是把一章課程拆成關係、比較、流程與決策。</p>
+      </div>
+      <div class="heading-actions">
+        <span class="version">Learning UI · v2</span>
+        <button id="exportSvgBtn" class="secondary">SVG</button>
+        <button id="exportPngBtn" class="secondary">PNG</button>
+        <button id="saveJsonBtn" class="secondary">儲存 JSON</button>
+      </div>
+    </header>
+
+    <section id="startSection" class="hero composer-card">
+      <div class="composer-main">
+        <p class="eyebrow">01 / 先說清楚你要學什麼</p>
+        <h2>貼入一小段內容，先找最適合的學習視圖。</h2>
+        <p>不要一次貼整本書。最理想的是一個章節、一個概念群，或一個你想釐清的問題。</p>
+        <textarea id="courseInput" class="course-input" placeholder="例如：比較零工式、批量式、組裝線與連續式的產量、彈性、成本與適用產品…"></textarea>
+        <div class="actions">
+          <button id="recommendBtn" class="primary">分析並推薦視圖</button>
+          <button id="clearCourseBtn" class="secondary">清除</button>
         </div>
         <div id="recommendation" class="recommendation" hidden></div>
-      </section>
-
-      <section>
-        <h2>學習圖形</h2>
-        <p class="muted">選一個模板，再改成你的課程內容。</p>
-        <div id="templateList" class="template-list"></div>
-      </section>
-
-      <section class="editor-section">
-        <div class="section-title-row">
-          <h2>JSON 指令</h2>
-          <button id="sampleBtn">載入範例</button>
-        </div>
-        <textarea id="jsonInput" spellcheck="false" aria-label="JSON 指令"></textarea>
-        <div class="row">
-          <button id="renderBtn" class="primary">產生圖形</button>
-          <button id="copyPromptBtn">複製 AI 提示詞</button>
-        </div>
-        <p id="status" role="status" aria-live="polite"></p>
-      </section>
-    </aside>
-
-    <section class="workspace">
-      <div class="workspace-toolbar">
-        <button id="zoomInBtn">＋</button>
-        <button id="zoomOutBtn">−</button>
-        <button id="resetBtn">重置</button>
       </div>
-      <svg id="canvas" xmlns="http://www.w3.org/2000/svg" aria-label="知識結構圖">
-        <g id="scene"></g>
-      </svg>
-      <div id="detailPanel" class="detail-panel">
-        <strong>節點說明</strong>
-        <div id="detailContent">點選節點查看說明。</div>
+      <aside class="learning-guide" aria-label="三步學習法">
+        <span class="guide-number">3 steps</span>
+        <h3>一張圖只做三件事</h3>
+        <ol>
+          <li><strong>找結構</strong><span>這些概念是分類、流程、比較，還是因果？</span></li>
+          <li><strong>看關係</strong><span>節點之間為什麼連在一起？</span></li>
+          <li><strong>自己解釋</strong><span>關掉原文後，能不能說回來？</span></li>
+        </ol>
+      </aside>
+    </section>
+
+    <section id="librarySection" class="panel template-panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">02 / 選擇知識結構</p>
+          <h2>不要所有內容都畫成心智圖。</h2>
+          <p>不同問題需要不同視圖。先選「你要理解的關係」，再選圖。</p>
+        </div>
+        <label class="search-box">
+          <span>搜尋視圖</span>
+          <input id="templateSearch" type="search" placeholder="比較、流程、公式、前置知識…" />
+        </label>
+      </div>
+      <div id="templateList" class="template-list"></div>
+    </section>
+
+    <section id="studySection" class="panel study-panel">
+      <div class="study-head">
+        <div>
+          <p class="eyebrow">03 / 視覺學習</p>
+          <div class="view-title-line">
+            <h2 id="currentViewName">概念圖</h2>
+            <span id="currentViewTag" class="view-tag">RELATION</span>
+          </div>
+          <p id="currentViewDesc">用關係詞連接概念，適合釐清「包含、導致、依賴、影響」。</p>
+        </div>
+        <div class="canvas-actions">
+          <button id="fitBtn" class="secondary">適合畫面</button>
+          <button id="zoomOutBtn" class="icon-btn" aria-label="縮小">−</button>
+          <button id="zoomInBtn" class="icon-btn" aria-label="放大">＋</button>
+          <button id="resetBtn" class="secondary">重置</button>
+          <button id="focusModeBtn" class="primary">專注看圖</button>
+        </div>
+      </div>
+
+      <div class="study-workbench">
+        <div class="canvas-card">
+          <div class="canvas-hint"><span>拖曳移動畫布</span><span>滾輪縮放</span><span>點節點看說明</span></div>
+          <svg id="canvas" xmlns="http://www.w3.org/2000/svg" aria-label="知識結構圖">
+            <g id="scene"></g>
+          </svg>
+        </div>
+
+        <aside class="study-inspector">
+          <div class="inspector-section">
+            <p class="eyebrow">NODE / 節點理解</p>
+            <h3>這個節點在說什麼？</h3>
+            <div id="detailContent" class="detail-content">點選圖上的節點，先讀一句說明，再用自己的話重講。</div>
+          </div>
+
+          <div class="inspector-section recall-box">
+            <p class="eyebrow">ACTIVE RECALL / 主動回想</p>
+            <h3>先不看原文，回答三件事</h3>
+            <ul>
+              <li>它是什麼？</li>
+              <li>它為什麼重要？</li>
+              <li>它和哪個概念最容易搞混？</li>
+            </ul>
+            <div class="mastery-actions">
+              <button id="markReviewBtn" class="secondary">還要再看</button>
+              <button id="markKnownBtn" class="primary">我能解釋</button>
+            </div>
+            <p id="masteryStatus" class="micro-status"></p>
+          </div>
+
+          <div class="inspector-section note-box">
+            <label for="studyNote">我的一句話筆記</label>
+            <textarea id="studyNote" placeholder="不用抄教材。只寫你自己的解釋、容易錯的地方，或一個例子。"></textarea>
+            <p id="noteStatus" class="micro-status">自動保存在這台瀏覽器。</p>
+          </div>
+        </aside>
       </div>
     </section>
+
+    <section id="advancedSection" class="panel advanced-panel">
+      <details>
+        <summary>
+          <span><strong>04 / 進階編輯</strong><small>需要精準控制資料時再打開 JSON，不要讓程式碼干擾平常學習。</small></span>
+          <span class="summary-arrow">⌄</span>
+        </summary>
+        <div class="advanced-grid">
+          <div>
+            <div class="section-title-row">
+              <label for="jsonInput">JSON 指令</label>
+              <button id="sampleBtn" class="secondary">載入範例</button>
+            </div>
+            <textarea id="jsonInput" spellcheck="false" aria-label="JSON 指令"></textarea>
+          </div>
+          <div class="advanced-help">
+            <h3>什麼時候需要這裡？</h3>
+            <p>當你要新增節點、改關係、調整比較欄位，或把 AI 產生的結構貼進來時。</p>
+            <button id="renderBtn" class="primary">套用 JSON</button>
+            <button id="copyPromptBtn" class="secondary">複製 AI 提示詞</button>
+            <p id="status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <footer>
+      <span>Knowledge Structure Studio</span>
+      <span>先理解，再整理；先回想，再複習。</span>
+    </footer>
   </main>
 
   <script src="templates.js"></script>
   <script src="app.js"></script>
+  <script src="ui.js"></script>
 </body>
 </html>
