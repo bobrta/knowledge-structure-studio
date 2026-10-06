@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Knowledge Structure Studio｜把課程內容轉成概念圖、決策樹、比較矩陣、流程與考前總覽。" />
+  <title>Knowledge Structure Studio｜知識結構工作室</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <strong>🧠 Knowledge Structure Studio</strong>
+      <span>知識結構工作室</span>
+    </div>
+    <div class="top-actions">
+      <button id="fitBtn">適合畫面</button>
+      <button id="exportSvgBtn">匯出 SVG</button>
+      <button id="exportPngBtn">匯出 PNG</button>
+      <button id="saveJsonBtn">儲存 JSON</button>
+    </div>
+  </header>
+
+  <main>
+    <aside class="sidebar">
+      <section>
+        <h2>學習圖形</h2>
+        <p class="muted">選一個模板，再改成你的課程內容。</p>
+        <div id="templateList" class="template-list"></div>
+      </section>
+
+      <section class="editor-section">
+        <div class="section-title-row">
+          <h2>JSON 指令</h2>
+          <button id="sampleBtn">載入範例</button>
+        </div>
+        <textarea id="jsonInput" spellcheck="false" aria-label="JSON 指令"></textarea>
+        <div class="row">
+          <button id="renderBtn" class="primary">產生圖形</button>
+          <button id="copyPromptBtn">複製 AI 提示詞</button>
+        </div>
+        <p id="status" role="status" aria-live="polite"></p>
+      </section>
+    </aside>
+
+    <section class="workspace">
+      <div class="workspace-toolbar">
+        <button id="zoomInBtn">＋</button>
+        <button id="zoomOutBtn">−</button>
+        <button id="resetBtn">重置</button>
+      </div>
+      <svg id="canvas" xmlns="http://www.w3.org/2000/svg" aria-label="知識結構圖">
+        <g id="scene"></g>
+      </svg>
+      <div id="detailPanel" class="detail-panel">
+        <strong>節點說明</strong>
+        <div id="detailContent">點選節點查看說明。</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="templates.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
